@@ -1,0 +1,21 @@
+CREATE TABLE users (
+  id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  uuid varchar(36) NOT NULL UNIQUE,
+  name varchar(255) NOT NULL ,
+  email varchar(255) NOT NULL ,
+  password varchar(255) NOT NULL ,
+  authent varchar(100) NOT NULL ,
+  avatar varchar(100) NOT NULL ,
+  phone varchar(18),
+  google_id varchar(255),
+  remember_token varchar(255),
+  verification_code varchar(30) NULL ,
+  email_verified_at datetime(3) NULL ,
+  status boolean DEFAULT  TRUE,
+  deleted_at datetime(3) NULL ,
+  created_at datetime(3) NOT NULL,
+  updated_at datetime(3) NOT NULL,
+  PRIMARY KEY (id),
+  KEY idx_users_created_at (created_at),
+  KEY idx_users_updated_at (updated_at)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;

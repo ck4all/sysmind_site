@@ -1,0 +1,22 @@
+package lang
+
+const MsgSuccess = "Sukses"
+const MsgStoreSuccess = "Proses simpan data berhasil..!"
+const MsgUpdateSuccess = "Proses ubah data berhasil...!"
+const MsgDeleteSuccess = "Proses hapus data berhasil...!"
+const MsgAppInfoUpdateSuccess = "Proses ubah profil berhasil...!"
+const MsgUserUpdateProfileSuccess = "Perubahann profil anda berhasil...!"
+const MsgChangePasswordSuccess = "Proses ubah kata sandi berhasil...!"
+const MsgUploadSuccess = "Proses unggah berhasil...!"
+const MsgFileToLarge = "Opps.., File terlalu besar dari yang diizinkan...!"
+const MsgDoctypeError = "Opps..., Parameter tidak diizinkan..!"
+const MsgError = "Opps..., terjadi kesalahan"
+const MsgSuccessImport = "Proses import berhasil...!"
+
+const MsgRegisterUserSuccess = "Proses registrasi pengguna berhasil..!"
+const MsgEmailRegistered = "Opps..., email telah terdaftar"
+const MsgLoginError = "Opps.., pengguna dan kata sandi tidak benar"
+const MsgResetPasswordSuccess = "Proses reset kata sandi berhasil...!"
+const MsgLogoutSuccess = "Proses logout berhasil..!"
+const MsgTokenIssue = "Opps.., token bermasalah"
+const MsgTokenRequired = "Opps..., diperlukan token"
