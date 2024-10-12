@@ -25,6 +25,19 @@ func IntToBool(payload int) bool {
 	}
 }
 
+func StirngToInt8(payload string) int8 {
+	value, err := strconv.ParseInt(payload, 10, 8)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return 0
+	}
+
+	// Typecast to int8
+	int8Value := int8(value)
+
+	return int8Value
+}
+
 func ByteToKiloByte(bytes int64) float64 {
 	return float64(bytes) / 1024.0
 }

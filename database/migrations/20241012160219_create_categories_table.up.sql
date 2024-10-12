@@ -5,7 +5,7 @@ CREATE TABLE categories (
   slug_name varchar(255) NULL ,
   urutan int8 NULL ,
   user_uuid varchar(36) NULL ,
-  deleted_at datetime(3) NOT NULL ,
+  deleted_at datetime(3) NULL ,
   created_at datetime(3) NOT NULL,
   updated_at datetime(3) NOT NULL,
   PRIMARY KEY (id),

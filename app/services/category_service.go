@@ -1,8 +1,10 @@
 package services
 
 import (
+	"github.com/google/uuid"
 	"github.com/goravel/framework/facades"
 	"goravel/app/helpers"
+	"goravel/app/http/requests"
 	"goravel/app/models"
 	"strings"
 )
@@ -15,6 +17,12 @@ func NewCategoryService() *CategoryService {
 }
 
 type FetchCategoryResponse struct {
+	Uuid     string `json:"id"`
+	Name     string `json:"name"`
+	SlugName string `json:"slug_name"`
+	Urutan   int8   `json:"urutan"`
+}
+type StoreCategoryResponse struct {
 	Uuid     string `json:"id"`
 	Name     string `json:"name"`
 	SlugName string `json:"slug_name"`
@@ -56,5 +64,32 @@ func (c *CategoryService) Fetch(page int, itemsPerPage int, keyWord string, sort
 	meta := helpers.SetMeta(page, itemsPerPage, total)
 
 	return datas, meta, err
+
+}
+
+func (c *CategoryService) Show() {
+
+}
+
+func (c *CategoryService) Store(req requests.CategoryRequest) (StoreCategoryResponse, error) {
+	var model models.Category
+
+	model.Uuid = uuid.New().String()
+	model.Name = req.Name
+	model.Urutan = helpers.StirngToInt8(req.Urutan)
+
+	err := facades.Orm().Query().Save(&model)
+
+	if err != nil {
+		return StoreCategoryResponse{}, err
+	}
+
+	result := StoreCategoryResponse{
+		Uuid:   model.Uuid,
+		Name:   model.Name,
+		Urutan: model.Urutan,
+	}
+
+	return result, err
 
 }

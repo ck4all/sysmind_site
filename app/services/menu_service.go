@@ -91,6 +91,14 @@ func (s *MenuService) Fetch(ctx http.Context) ([]MenuItem, error) {
 				},
 			},
 			{
+				Title: "Manajemen Kategory",
+				Props: MenuProps{
+					Type:  "item",
+					Icon:  "mdi-book-check",
+					Route: "/auth/logged/webmpp/category",
+				},
+			},
+			{
 				Title: "Utilitas",
 				Props: MenuProps{
 					Type: "subheader",
