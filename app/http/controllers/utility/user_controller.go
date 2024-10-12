@@ -176,7 +176,7 @@ func (r *UserController) Destroy(ctx http.Context) http.Response {
 }
 
 func (r *UserController) UpdateProfile(ctx http.Context) http.Response {
-	var req requests.UserRequest
+	var req requests.UserUpdateProfilRequest
 
 	validate, err := ctx.Request().ValidateRequest(&req)
 

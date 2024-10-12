@@ -266,7 +266,7 @@ func (s *UserService) Delete(id string) (UserDeleteResponse, error) {
 
 }
 
-func (s *UserService) UpdateProfile(ctx http.Context, req requests.UserRequest) (bool, error) {
+func (s *UserService) UpdateProfile(ctx http.Context, req requests.UserUpdateProfilRequest) (bool, error) {
 	var model models.User
 	var userauth models.User
 
