@@ -26,27 +26,22 @@ Welcome to star, PR and issues！
 ## Getting started
 
 ```
+// Run Go Mod
+go mod tidy
+
 // Generate APP_KEY
 go run . artisan key:generate
 
-// Route
-facades.Route().Get("/", userController.Show)
+//konfigurasi .env file
 
-// ORM
-facades.Orm().Query().With("Author").First(&user)
+//run migrate 
+go run . artisan migrate
 
-// Task Scheduling
-facades.Schedule().Command("send:emails name").EveryMinute()
+//run db seed
+go run . artisan db:seed --seeder=AppInfoSeeder
 
-// Log
-facades.Log().Debug(message)
+go run . artisan db:seed --seeder=UserSeeder
 
-// Cache
-value := facades.Cache().Get("goravel", "default")
-
-// Queues
-err := facades.Queue().Job(&jobs.Test{}, []queue.Arg{}).Dispatch()
-```
 
 ## Documentation
 
