@@ -9,6 +9,8 @@ type UserRequest struct {
 	Name    string `form:"name" json:"name"`
 	Email   string `form:"email" json:"email"`
 	Authent string `form:"authent" json:"authent"`
+	Phone   string `form:"phone" json:"phone"`
+	Avatar  string `form:"avatar" json:"avatar"`
 	Status  bool   `form:"status" json:"status"`
 }
 
@@ -21,6 +23,7 @@ func (r *UserRequest) Rules(ctx http.Context) map[string]string {
 		"name":    "required",
 		"email":   "required|email",
 		"authent": "required",
+		"phone":   "required",
 	}
 }
 

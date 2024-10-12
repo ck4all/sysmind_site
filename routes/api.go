@@ -65,6 +65,7 @@ func Api() {
 			router.Get("users/{id}", userController.Show)
 			router.Put("users/{id}", userController.Update)
 			router.Delete("users/{id}", userController.Destroy)
+			router.Post("user-update-profile", userController.UpdateProfile)
 
 			//Route FileManagement
 			router.Get("file-managements", fileManagementController.Index)
