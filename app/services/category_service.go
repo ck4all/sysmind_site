@@ -76,6 +76,7 @@ func (c *CategoryService) Store(req requests.CategoryRequest) (StoreCategoryResp
 
 	model.Uuid = uuid.New().String()
 	model.Name = req.Name
+	model.SlugName = helpers.CreateSlug(req.Name)
 	model.Urutan = helpers.StirngToInt8(req.Urutan)
 
 	err := facades.Orm().Query().Save(&model)

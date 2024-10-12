@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"math/rand"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -176,4 +177,21 @@ func CalculateMonthAge(birthdate string) int {
 
 	totalMonths := years*12 + months
 	return totalMonths
+}
+
+func CreateSlug(payload string) string {
+	// Convert the input string to lowercase
+	slug := strings.ToLower(payload)
+
+	// Replace all spaces with hyphens
+	slug = strings.ReplaceAll(slug, " ", "-")
+
+	// Remove all non-alphanumeric characters (except hyphens)
+	re := regexp.MustCompile(`[^\w-]+`)
+	slug = re.ReplaceAllString(slug, "")
+
+	// Trim any extra hyphens from the start or end
+	slug = strings.Trim(slug, "-")
+
+	return slug
 }
