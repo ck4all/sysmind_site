@@ -5,6 +5,7 @@ import (
 	"github.com/goravel/framework/facades"
 	"goravel/app/http/controllers/masterdata"
 	"goravel/app/http/controllers/utility"
+	"goravel/app/http/controllers/webmpp"
 	"goravel/app/http/middleware"
 	"goravel/app/services"
 
@@ -19,6 +20,7 @@ func Api() {
 	userService := services.NewUserService()
 	fileManagementService := services.NewFileManagementService()
 	menuService := services.NewMenuService()
+	categoryService := services.NewCategoryService()
 
 	//declare package controller variable
 	authController := controllers.NewAuthController(authService)
@@ -27,6 +29,7 @@ func Api() {
 	userController := utility.NewUserController(userService)
 	fileManagementController := utility.NewFileManagementController(fileManagementService)
 	menuController := controllers.NewMenuController(menuService)
+	categoryController := webmpp.NewCategoryController(categoryService)
 
 	//create route here
 	facades.Route().Prefix("api/v1/").Group(func(router route.Router) {
@@ -55,6 +58,16 @@ func Api() {
 			//route application information
 			router.Get("app-info", appInfoController.Index)
 			router.Put("app-info/{id}", appInfoController.Update)
+		})
+
+		//Router WebMpp
+		router.Middleware(middleware.Auth()).Prefix("webmpp").Group(func(router route.Router) {
+			//route category
+			router.Get("category", categoryController.Index)
+			router.Post("category", categoryController.Store)
+			router.Get("category/{id}", categoryController.Show)
+			router.Put("category/{id}", categoryController.Update)
+			router.Delete("category/{id}", categoryController.Destroy)
 		})
 
 		//Route Utility

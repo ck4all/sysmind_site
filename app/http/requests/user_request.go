@@ -11,6 +11,7 @@ type UserRequest struct {
 	Authent string `form:"authent" json:"authent"`
 	Phone   string `form:"phone" json:"phone"`
 	Avatar  string `form:"avatar" json:"avatar"`
+	Reset   bool   `form:"reset" json:"reset"`
 	Status  bool   `form:"status" json:"status"`
 }
 

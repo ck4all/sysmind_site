@@ -215,10 +215,16 @@ func (s *UserService) Update(req requests.UserRequest, id string) (UserResponse,
 		return UserResponse{}, err
 	}
 
+	seederPassword := helpers.GeneratePassword(8)
+
 	model.Name = req.Name
 	model.Phone = req.Phone
 	model.Status = req.Status
 
+	if req.Reset == true {
+		hashedpassword, _ := helpers.HashPassword(seederPassword)
+		model.Password = hashedpassword
+	}
 	err = facades.Orm().Query().Save(&model)
 
 	if err != nil {
@@ -245,6 +251,32 @@ func (s *UserService) Update(req requests.UserRequest, id string) (UserResponse,
 		Email:   model.Email,
 		Authent: strings.ToUpper(model.Authent),
 		Status:  tempStatus,
+	}
+
+	if (req.Reset == true) {
+		//send message
+		config := facades.Config()
+		wa_title := helpers.AnyToString(config.Env("WA_TITLE"))
+		wa_desc := helpers.AnyToString(config.Env("WA_DESC"))
+		wa_company := helpers.AnyToString(config.Env("WA_COMPANY"))
+		wa_slogan := helpers.AnyToString(config.Env("WA_SLOGAN"))
+
+		message := "*" + wa_title + "* \r\n"
+		message = message + wa_desc
+		message = message + "\r\n\r\nHalo... \r\n"
+		message = message + strings.ToUpper(req.Name)
+		message = message + "\r\n\r\nSelamat Anda telah terdaftar sebagai akun pengguna pada sistem kami dengan data akun sebagai berikut :"
+		message = message + "\r\nNama pengguna :  " + req.Email
+		message = message + "\r\nKata Sandi :  " + seederPassword
+		message = message + " \r\n\r\n"
+		message = message + wa_slogan
+		message = message + "\r\n" + wa_company
+
+		_, errorwa := helpers.SendMessage(req.Phone, message)
+
+		if errorwa != nil {
+			fmt.Println(errorwa)
+		}
 	}
 
 	return userResponse, nil

@@ -24,8 +24,8 @@ func (r *UserController) Index(ctx http.Context) http.Response {
 	sortMode := ctx.Request().Input("sortBy[0][order]", "")
 	keyWord := ctx.Request().Input("search", "")
 
-	itemsPerPage := ctx.Request().InputInt("itemsPerPage")
-	page := ctx.Request().InputInt("page")
+	itemsPerPage := ctx.Request().InputInt("itemsPerPage", 10)
+	page := ctx.Request().InputInt("page", 1)
 	result, meta, err := r.UserService.Fetch(page, itemsPerPage, keyWord, sortBy, sortMode)
 
 	if err != nil {
