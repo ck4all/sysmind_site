@@ -42,6 +42,7 @@ go run . artisan db:seed --seeder=AppInfoSeeder
 
 go run . artisan db:seed --seeder=UserSeeder
 
+```
 
 ## Documentation
 
